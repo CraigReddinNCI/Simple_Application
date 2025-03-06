@@ -9,7 +9,7 @@ sudo npm install -g pm2
 pm2 stop simple_app
 
 # Change directory into the folder where the application is downloaded
-cd Simple_Application/
+cd Simple_Application
 
 # Install application dependencies
 npm install
