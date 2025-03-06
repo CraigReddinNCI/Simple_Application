@@ -53,6 +53,9 @@ jobs:
           name: Publish Docker Image
           command: docker push $IMAGE_APP
       - run:
+          name: Get Login Key
+          command: echo "$CON_KEY" > logkey.pem
+      - run:
           name: Change rights of pem file
           command: chmod 600 logkey.pem
       - persist_to_workspace:
