@@ -57,7 +57,7 @@ jobs:
           command: echo "$CON_KEY" > logkey.pem
       - run:
           name: Change rights of pem file
-          command: chmod 600 privatekey.pem  
+          command: chmod 600 logkey.pem  
       
   deploy:
     docker:
