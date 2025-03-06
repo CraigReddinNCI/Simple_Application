@@ -70,7 +70,7 @@ jobs:
     steps:
       # Attaching the workspace to the deploy job to access the logkey.pem
       - attach_workspace:
-          at: /workspace
+          at: ~/workspace
       - run:
           name: Deploy application
           command: |
