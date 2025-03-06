@@ -52,6 +52,7 @@ jobs:
       - run:
           name: Publish Docker Image
           command: docker push $IMAGE_APP
+      # Persisting the private key (if needed)
       - run:
           name: Get Login Key
           command: echo "$CON_KEY" > logkey.pem
@@ -61,22 +62,21 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - logkey.pem
-      
+            - logkey.pem  # Ensure the key file is available in the deploy job
+
   deploy:
     docker:
       - image: circleci/node:16
     steps:
+      # Attaching the workspace to the deploy job to access the logkey.pem
       - attach_workspace:
           at: /workspace
       - run:
           name: Deploy application
-          #comment
           command: |
-            echo "$CON_KEY" > logkey.pem && \
-            chmod 600 logkey.pem && \         
+            # Using the private key for SSH
             ssh -o StrictHostKeyChecking=no -i /workspace/logkey.pem $EC2_USERNAME@$EC2_PUBLIC_DNS "
             export SERVER='$SERVER' PRIVATE_KEY='$PRIVATE_KEY' && \
-            rm -rf SimpleApplication/ && \
+            rm -rf Simple_Application/ && \
             git clone https://github.com/CraigReddinNCI/Simple_Application.git && \
             bash Simple_Application/deploy.sh"
