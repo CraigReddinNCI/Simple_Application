@@ -19,7 +19,7 @@ workflows:
 
 jobs:
   build:
-    working_directory: ~/ExampleApplication
+    working_directory: ~/Simple_Application
     docker:
       - image: circleci/node:16  # Updated Node.js version
     steps:
@@ -52,15 +52,23 @@ jobs:
       - run:
           name: Publish Docker Image
           command: docker push $IMAGE_APP
+      - run:
+          name: Get Login Key
+          command: echo "$CON_KEY" > logkey.pem
+      - run:
+          name: Change rights of pem file
+          command: chmod 600 privatekey.pem  
+      
   deploy:
     docker:
       - image: circleci/node:16
     steps:
+      
       - run:
           name: Deploy application
           #comment
           command: |
-            ssh -o StrictHostKeyChecking=no $EC2_USERNAME@$EC2_PUBLIC_DNS "
+            ssh -o StrictHostKeyChecking=no logkey.pem $EC2_USERNAME@$EC2_PUBLIC_DNS "
             export SERVER='$SERVER' PRIVATE_KEY='$PRIVATE_KEY' && \
             rm -rf SimpleApplication/ && \
             git clone https://github.com/CraigReddinNCI/Simple_Application.git && \
