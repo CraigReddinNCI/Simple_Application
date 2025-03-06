@@ -54,7 +54,7 @@ jobs:
           command: docker push $IMAGE_APP
   deploy:
     docker:
-      - image: circleci/node:16  # Updated Node.js version.
+      - image: circleci/node:16
     steps:
       - run:
           name: Deploy application
