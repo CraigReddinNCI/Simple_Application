@@ -1,6 +1,6 @@
 # Use an official Node.js runtime as a parent image
 FROM node:16
-
+cd Simple_Application
 # Set the working directory inside the container
 WORKDIR /app
 
@@ -14,8 +14,8 @@ RUN npm install
 COPY . .
 
 # Copy SSL certificates (if needed in the app)
-COPY privatekey.pem /app/privatekey.pem
-COPY server.crt /app/server.crt
+COPY Simple_Application/server.crt /app/server.crt
+COPY Simple_Application/privatekey.pem /app/privatekey.pem
 
 # Expose the necessary ports
 EXPOSE 8080 8443
