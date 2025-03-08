@@ -22,5 +22,5 @@ RUN echo "$SERVER_CRT" > /app/server.crt && \
 # Expose the necessary ports
 EXPOSE 8443
 
-# Start the application
-CMD ["pm2-runtime", "start", "./bin/www", "--name", "simple_app"]
+# Start the application.
+CMD ["pm2", "start", "./bin/www", "--name", "simple_app"]
