@@ -1,20 +1,11 @@
 #!/usr/bin/env bash
-
-sudo apt update && sudo apt install nodejs npm -y
-
-# Install pm2 which is a production process manager for Node.js with a built-in load balancer.
-sudo npm install -g pm2
-
-# Stop any instance of our application running currently
-pm2 stop simple_app
-
-# Change directory into the folder where the application is downloaded
 cd Simple_Application
+# Stop and remove the old container if running
+sudo docker stop simple_app || true
+sudo docker rm simple_app || true
 
-# Install application dependencies
-npm install
-echo $PRIVATE_KEY > privatekey.pem
-echo $SERVER > server.crt
-
-# Start the application with the process name example_app using pm2
-pm2 start ./bin/www --name simple_app
+# Run the new container
+docker run -d \
+  -p 8080:8080 -p 8443:8443 \
+  --name simple_app \
+  $IMAGE_APP
