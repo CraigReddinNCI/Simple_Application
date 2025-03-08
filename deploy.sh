@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-cd Simple_Application
 # Stop and remove the old container if running
 sudo docker stop simple_app || true
 sudo docker rm simple_app || true
