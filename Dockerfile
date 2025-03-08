@@ -13,8 +13,8 @@ RUN npm install
 COPY . .
 
 # Copy SSL certificates (if needed in the app)
-COPY server.crt /app/server.crt
-COPY privatekey.pem /app/privatekey.pem
+COPY ./server.crt /app/server.crt
+COPY ./privatekey.pem /app/privatekey.pem
 
 # Expose the necessary ports
 EXPOSE 8080 8443
