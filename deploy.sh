@@ -4,7 +4,7 @@ sudo docker stop simple_app || true
 sudo docker rm simple_app || true
 
 # Run the new container
-docker run -d \
+sudo docker run -d \
     -p 8443:8443 \
   --name simple_app \
   $IMAGE_APP
