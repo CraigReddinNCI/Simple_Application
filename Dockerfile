@@ -20,7 +20,7 @@ RUN echo "$SERVER_CRT" > /app/server.crt && \
     echo "$PRIVATE_KEY" > /app/privatekey.pem
 
 # Expose the necessary ports
-EXPOSE 8080 8443
+EXPOSE 8443
 
 # Start the application
 CMD ["pm2-runtime", "start", "./bin/www", "--name", "simple_app"]
