@@ -8,13 +8,16 @@ COPY package.json package-lock.json ./
 
 # Install dependencies
 RUN npm install
-RUN ls
 # Copy the entire application into the container
 COPY . .
 
 # Copy SSL certificates (if needed in the app)
-COPY ./server.crt /app/server.crt
-COPY ./privatekey.pem /app/privatekey.pem
+ARG SERVER_CRT
+ARG PRIVATE_KEY
+
+# Create the SSL certificate files inside the container
+RUN echo "$SERVER_CRT" > /app/server.crt && \
+    echo "$PRIVATE_KEY" > /app/privatekey.pem
 
 # Expose the necessary ports
 EXPOSE 8080 8443
