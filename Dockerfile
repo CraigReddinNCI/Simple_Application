@@ -1,7 +1,30 @@
-#syntax=docker/dockerfile:1
-FROM circleci/node:10.16.3
-ENV NODE_ENV=production
-COPY ["package.json", "package-lock.json*", "./"]
-RUN sudo npm install
+FROM node:16
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy package.json and package-lock.json first (for caching layers)
+COPY package.json package-lock.json ./
+
+# Install dependencies
+RUN npm install
+
+# Install pm2 globally
+RUN npm install pm2 -g
+
+# Copy the entire application into the container
 COPY . .
-CMD [ "npm", "start"]
+
+# Copy SSL certificates (if needed in the app)
+ARG SERVER_CRT
+ARG PRIVATE_KEY
+
+# Create the SSL certificate files inside the container
+RUN echo "$SERVER_CRT" > /app/server.crt && \
+    echo "$PRIVATE_KEY" > /app/privatekey.pem
+
+# Expose the necessary ports
+EXPOSE 8080 8443
+
+# Start the application with pm2
+CMD ["pm2-runtime", "start", "./bin/www", "--name", "simple_app"]
