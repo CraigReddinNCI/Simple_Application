@@ -8,7 +8,7 @@ COPY package.json package-lock.json ./
 
 # Install dependencies
 RUN npm install
-
+RUN ls
 # Copy the entire application into the container
 COPY . .
 
