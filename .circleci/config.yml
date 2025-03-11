@@ -21,7 +21,7 @@ jobs:
   build:
     working_directory: ~/Simple_Application
     docker:
-      - image: circleci/node:16  # Updated Node.js version
+      - image: circleci/node:16
     steps:
       - checkout
       - setup_remote_docker
@@ -36,9 +36,9 @@ jobs:
       - run:
           name: Install dependencies
           command: npm install
-      # - run:
-      #     name: Run tests
-      #     command: npm run test
+      - run:
+          name: Npm Autdit
+          command: npm audit || true
       - save_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:

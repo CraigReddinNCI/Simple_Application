@@ -15,16 +15,16 @@ RUN npm install pm2 -g
 # Copy the entire application into the container
 COPY . .
 
-# Copy SSL certificates (if needed in the app)
+# Copy SSL certificates for HTTPS confiduration
 ARG SERVER_CRT
 ARG PRIVATE_KEY
 
-# Create the SSL certificate files inside the container
+# Pass the SSL certificate files inside the container
 RUN echo "$SERVER_CRT" > /app/server.crt && \
     echo "$PRIVATE_KEY" > /app/privatekey.pem
 
-# Expose the necessary ports
-EXPOSE 8080 8443
+# Expose ports8443
+EXPOSE 8443
 
 # Start the application with pm2
 CMD ["pm2-runtime", "start", "./bin/www", "--name", "simple_app"]

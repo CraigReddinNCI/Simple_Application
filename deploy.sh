@@ -3,7 +3,7 @@
 sudo docker stop simple_app || true
 sudo docker rm simple_app || true
 
-# Run the new container
+# Run the new container in background.
 sudo docker run -d \
     -p 8443:8443 \
   --name simple_app \
