@@ -3,7 +3,7 @@
 sudo docker stop simple_app || true
 sudo docker rm simple_app || true
 
-sudo docker image prune -a -f
+sudo docker image prune -a
 sudo docker pull $IMAGE_APP:latest
 
 
