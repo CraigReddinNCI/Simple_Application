@@ -3,6 +3,8 @@
 sudo docker stop simple_app || true
 sudo docker rm simple_app || true
 
+sudo docker pull $IMAGE_APP:latest
+
 # Run the new container
 sudo docker run -d \
     -p 8443:8443 \
