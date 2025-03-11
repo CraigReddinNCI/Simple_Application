@@ -9,4 +9,5 @@ sudo docker rm simple_app || true
 sudo docker run -d \
     -p 8443:8443 \
   --name simple_app \
+  --pull always \
   $IMAGE_APP
