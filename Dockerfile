@@ -20,8 +20,8 @@ ARG SERVER_CRT
 ARG PRIVATE_KEY
 
 # Pass the SSL certificate files inside the container
-RUN echo "$SERVER_CRT" > server.crt && \
-    echo "$PRIVATE_KEY" > privatekey.pem
+RUN echo "$SERVER_CRT" > /app/server.crt && \
+    echo "$PRIVATE_KEY" > /app/privatekey.pem
 
 # Expose ports8443
 EXPOSE 8443
