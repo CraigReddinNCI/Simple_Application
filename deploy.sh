@@ -1,8 +1,8 @@
-#!/usr/bin/env bash
 # Stop and remove the old container if running
 sudo docker stop simple_app || true
 sudo docker rm simple_app || true
-sudo docker rmi -f $IMAGE_APP:latest  # Remove the old image
+#remove latest verstion stop caching issue
+sudo docker rmi -f $IMAGE_APP:latest 
 sudo docker pull $IMAGE_APP:latest    # Ensure we get the latest version
 
 # Run the
