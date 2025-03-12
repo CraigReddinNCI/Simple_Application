@@ -66,6 +66,6 @@ jobs:
             ssh -o StrictHostKeyChecking=no $EC2_USERNAME@$EC2_PUBLIC_DNS "
             export SERVER='$SERVER' PRIVATE_KEY='$PRIVATE_KEY' IMAGE_APP='$IMAGE_APP' && \
             cd Simple_Application && \
-            sudo docker pull $IMAGE_APP:latest && \
+            npm install && \
             pm2 start ./bin/www" --name simple_app
 
