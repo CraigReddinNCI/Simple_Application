@@ -48,7 +48,7 @@ jobs:
           command: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
       - run:
           name: Build Docker Image
-          command: docker build --no-cache --build-arg SERVER_CRT="$SERVER_CRT" --build-arg PRIVATE_KEY="$PRIVATE_KEY" -t $IMAGE_APP:latest .
+          command: docker build --no-cache --build-arg SERVER="$SERVER_CRT" --build-arg PRIVATE_KEY="$PRIVATE_KEY" -t $IMAGE_APP:latest .
 
       - run:
           name: Publish Docker Image
