@@ -27,4 +27,4 @@ RUN echo "$SERVER_CRT" > /app/server.crt && \
 EXPOSE 8443
 
 # Start the application with pm2
-CMD ["pm2-runtime", "start", "./bin/www", "--name", "simple_app", "--update-env"]
+CMD ["pm2-runtime", "start", "./bin/www", "--name", "simple_app"]
